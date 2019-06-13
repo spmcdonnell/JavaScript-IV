@@ -38,4 +38,25 @@ class Student extends Person {
         this.className = props.className;
         this.favSubjects = props.favSubjects;
     }
+
+    listsSubjects() {
+        return this.favSubjects.join(', ');
+    }
+
+    PRAssignment(subject) {
+        return `${this.name} has submitted a PR request for ${subject}`;
+    }
+
+    sprintChallenge() {
+        return `${this.name} has begun a sprint challenge on ${subject}`;
+    }
+}
+
+class ProjectManager extends Instructor {
+    constructor(props) {
+        super(props);
+
+        this.gradClassName = props.gradClassName;
+        this.favInstructor = props.favInstructor;
+    }
 }
