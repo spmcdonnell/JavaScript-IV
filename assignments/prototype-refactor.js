@@ -33,15 +33,15 @@ Prototype Refactor
 //   }
 
 class GameObject {
-  constructor(attr) {
-    this.createdAt = attr.createdAt;
-    this.name = attr.name;
-    this.dimensions = attr.dimensions;
-  }
+    constructor(attr) {
+        this.createdAt = attr.createdAt;
+        this.name = attr.name;
+        this.dimensions = attr.dimensions;
+    }
 
-  destroy() {
-    return `${this.name} was removed from the game.`;
-  }
+    destroy() {
+        return `${this.name} was removed from the game.`;
+    }
 }
 
 /*
@@ -62,15 +62,15 @@ class GameObject {
 //   };
 
 class CharacterStats extends GameObject {
-  constructor(attr) {
-    super(attr);
+    constructor(attr) {
+        super(attr);
 
-    this.healthPoints = attr.healthPoints;
-  }
+        this.healthPoints = attr.healthPoints;
+    }
 
-  takeDamage() {
-    return `${this.name} took damage.`;
-  }
+    takeDamage() {
+        return `${this.name} took damage.`;
+    }
 }
 
 /*
@@ -96,17 +96,17 @@ class CharacterStats extends GameObject {
 //   };
 
 class Humanoid extends CharacterStats {
-  constructor(attr) {
-    super(attr);
+    constructor(attr) {
+        super(attr);
 
-    this.team = attr.team;
-    this.weapons = attr.weapons;
-    this.language = attr.language;
-  }
+        this.team = attr.team;
+        this.weapons = attr.weapons;
+        this.language = attr.language;
+    }
 
-  greet = function() {
-    return `${this.name} offers a greeting in ${this.language}.`;
-  };
+    greet = function() {
+        return `${this.name} offers a greeting in ${this.language}.`;
+    };
 }
 
 /*
@@ -130,16 +130,16 @@ class Humanoid extends CharacterStats {
 //   };
 
 class Villain extends Humanoid {
-  constructor(attr) {
-    super(attr);
+    constructor(attr) {
+        super(attr);
 
-    this.powerLevel = attr.powerLevel;
-  }
+        this.powerLevel = attr.powerLevel;
+    }
 
-  powerUp() {
-    this.powerLevel += 5;
-    return `${this.name} increased their power level by 5 points.`;
-  }
+    powerUp() {
+        this.powerLevel += 5;
+        return `${this.name} increased their power level by 5 points.`;
+    }
 }
 
 /*
@@ -166,24 +166,24 @@ class Villain extends Humanoid {
 //   };
 
 class Hero extends Humanoid {
-  constructor(attr) {
-    super(attr);
+    constructor(attr) {
+        super(attr);
 
-    this.powerLevel = attr.powerLevel;
-  }
-
-  attack(victim) {
-    victim.healthPoints -= 5;
-    if (victim.healthPoints <= 0) {
-      return `Our hero attacked ${victim.name} and killed them!`;
-    } else {
-      return `Our hero attacked ${
-        victim.name
-      } and reduced their healthPoints by 5 points, bringing their remaining HP to ${
-        victim.healthPoints
-      }.`;
+        this.powerLevel = attr.powerLevel;
     }
-  }
+
+    attack(victim) {
+        victim.healthPoints -= 5;
+        if (victim.healthPoints <= 0) {
+            return `Our hero attacked ${victim.name} and killed them!`;
+        } else {
+            return `Our hero attacked ${
+                victim.name
+            } and reduced their healthPoints by 5 points, bringing their remaining HP to ${
+                victim.healthPoints
+            }.`;
+        }
+    }
 }
 
 /*
@@ -195,74 +195,74 @@ class Hero extends Humanoid {
 // Test you work by un-commenting these 3 objects and the list of console logs below:
 
 const mage = new Humanoid({
-  createdAt: new Date(),
-  dimensions: {
-    length: 2,
-    width: 1,
-    height: 1
-  },
-  healthPoints: 5,
-  name: "Bruce",
-  team: "Mage Guild",
-  weapons: ["Staff of Shamalama"],
-  language: "Common Tongue"
+    createdAt: new Date(),
+    dimensions: {
+        length: 2,
+        width: 1,
+        height: 1
+    },
+    healthPoints: 5,
+    name: 'Bruce',
+    team: 'Mage Guild',
+    weapons: ['Staff of Shamalama'],
+    language: 'Common Tongue'
 });
 
 const swordsman = new Humanoid({
-  createdAt: new Date(),
-  dimensions: {
-    length: 2,
-    width: 2,
-    height: 2
-  },
-  healthPoints: 15,
-  name: "Sir Mustachio",
-  team: "The Round Table",
-  weapons: ["Giant Sword", "Shield"],
-  language: "Common Tongue"
+    createdAt: new Date(),
+    dimensions: {
+        length: 2,
+        width: 2,
+        height: 2
+    },
+    healthPoints: 15,
+    name: 'Sir Mustachio',
+    team: 'The Round Table',
+    weapons: ['Giant Sword', 'Shield'],
+    language: 'Common Tongue'
 });
 
 const archer = new Humanoid({
-  createdAt: new Date(),
-  dimensions: {
-    length: 1,
-    width: 2,
-    height: 4
-  },
-  healthPoints: 10,
-  name: "Lilith",
-  team: "Forest Kingdom",
-  weapons: ["Bow", "Dagger"],
-  language: "Elvish"
+    createdAt: new Date(),
+    dimensions: {
+        length: 1,
+        width: 2,
+        height: 4
+    },
+    healthPoints: 10,
+    name: 'Lilith',
+    team: 'Forest Kingdom',
+    weapons: ['Bow', 'Dagger'],
+    language: 'Elvish'
 });
 
 const villain = new Villain({
-  createdAt: new Date(),
-  dimensions: {
-    length: 1,
-    width: 1,
-    height: 6
-  },
-  healthPoints: 10,
-  name: "Belic",
-  team: "Alistain",
-  weapons: ["Bow", "Dagger"],
-  language: "Grunts and whistles",
-  powerLevel: 10
+    createdAt: new Date(),
+    dimensions: {
+        length: 1,
+        width: 1,
+        height: 6
+    },
+    healthPoints: 10,
+    name: 'Belic',
+    team: 'Alistain',
+    weapons: ['Bow', 'Dagger'],
+    language: 'Grunts and whistles',
+    powerLevel: 10
 });
 
 const hero = new Hero({
-  createdAt: new Date(),
-  dimensions: {
-    length: 4,
-    width: 9,
-    height: 2
-  },
-  healthPoints: 10,
-  name: "Bob",
-  team: "Jones",
-  weapons: ["Buster Sword", "Bolt Materia"],
-  language: "mute"
+    createdAt: new Date(),
+    dimensions: {
+        length: 4,
+        width: 9,
+        height: 2
+    },
+    healthPoints: 10,
+    name: 'Bob',
+    team: 'Jones',
+    weapons: ['Buster Sword', 'Bolt Materia'],
+    language: 'mute'
 });
 
 console.log(mage.createdAt); // Today's date
