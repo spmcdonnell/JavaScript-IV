@@ -1,17 +1,54 @@
-<!doctype html>
+<!DOCTYPE html>
 
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>JS IV</title>
+        <title>JS IV</title>
+        <style>
+            html,
+            body {
+                height: 100vh;
+            }
+            html {
+                background-color: #7fedff;
+                padding: 5%;
+            }
+            h2 {
+                font-size: 1.7rem;
+            }
+            .flex {
+                display: flex;
+                justify-content: space-around;
+                text-align: center;
+            }
+            .flex > div {
+                width: 48%;
+                padding: 3%;
+                background-color: aliceblue;
+                border-radius: 15px;
+                box-shadow: 1px 1px 6px 1px rgba(0, 0, 0, 0.5);
+            }
+            .flex > div:first-child {
+                margin-right: 2%;
+            }
+        </style>
+    </head>
 
-  <script src="prototype-refactor.js"></script>
-  <script src="lambda-classes.js"></script>
-</head>
+    <body>
+        <div class="flex">
+            <div id="chris" class="student" data-name="chris">
+                <h2>Hello 1</h2>
+                <img src="#" />
+            </div>
+            <div id="jamie" class="student" data-name="jamie">
+                <h2>Hello 2</h2>
+                <img src="#" />
+            </div>
+        </div>
 
-<body>
-  <h1>JS IV - Check your work in the console!</h1>
-</body>
+        <script src="prototype-refactor.js"></script>
+        <script src="lambda-classes.js"></script>
+    </body>
 </html>

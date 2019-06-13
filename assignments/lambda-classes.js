@@ -28,6 +28,30 @@ class Instructor extends Person {
     grade(student, subject) {
         return `${student.name} receives a perfect score on ${subject}.`;
     }
+
+    changeGrade(student) {
+        var positiveResult = Math.round(Math.random() * 10) < 5 ? true : false;
+        var previousGrade = student.grade;
+        var possessive = student.name[student.name.length - 1] === "s" ? "'" : "'s";
+
+        if (positiveResult) {
+            student.grade += Math.round(Math.random() * 100);
+
+            if (student.grade > 100) {
+                student.grade = 100;
+            }
+
+            return `${student.name}${possessive} grade increased from ${previousGrade} to ${student.grade}`;
+        } else {
+            student.grade -= Math.round(Math.random() * 100);
+
+            if (student.grade < 0) {
+                student.grade = 0;
+            }
+
+            return `${student.name}${possessive} grade dropped from ${previousGrade} to ${student.grade}`;
+        }
+    }
 }
 
 class Student extends Person {
@@ -37,10 +61,11 @@ class Student extends Person {
         this.previousBackground = props.previousBackground;
         this.className = props.className;
         this.favSubjects = props.favSubjects;
+        this.grade = props.grade;
     }
 
     listsSubjects() {
-        return this.favSubjects.join(', ');
+        return this.favSubjects.join(", ");
     }
 
     PRAssignment(subject) {
@@ -49,6 +74,22 @@ class Student extends Person {
 
     sprintChallenge(subject) {
         return `${this.name} has begun a sprint challenge on ${subject}.`;
+    }
+
+    graduate() {
+        if (this.grade >= 70) {
+            document.querySelector('div[data-name="' + CSS.escape(this.name.toLowerCase()) + '"]').style.backgroundColor = "#adffe3";
+            document.querySelector('div[data-name="' + CSS.escape(this.name.toLowerCase()) + '"] h2').innerHTML = `${this.name} graduated!`;
+            document.querySelector('div[data-name="' + CSS.escape(this.name.toLowerCase()) + '"] img').src = "https://media.giphy.com/media/RdHSzuTg7lSlPuGVci/giphy.gif";
+
+            return `${this.name} graduated!`;
+        } else {
+            document.querySelector('div[data-name="' + CSS.escape(this.name.toLowerCase()) + '"]').style.backgroundColor = "#ffa6a6";
+            document.querySelector('div[data-name="' + CSS.escape(this.name.toLowerCase()) + '"] h2').innerHTML = `${this.name} has a little while to go before graduating.`;
+            document.querySelector('div[data-name="' + CSS.escape(this.name.toLowerCase()) + '"] img').src = "https://media.giphy.com/media/lmNPugL9ORbMs/giphy.gif";
+
+            return `${this.name} has a little while to go before graduating.`;
+        }
     }
 }
 
@@ -61,70 +102,72 @@ class ProjectManager extends Instructor {
     }
 
     standUp(channelName) {
-        return `${this.name} announces to ${
-            this.channelName
-        }, @channel standy times!​​​​​`;
+        return `${this.name} announces to ${this.channelName}, @channel standy times!​​​​​`;
     }
 
     debugsCode(student, subject) {
-        var possessive =
-            student.name[student.name.length - 1] === 's' ? "'" : "'s";
+        var possessive = student.name[student.name.length - 1] === "s" ? "'" : "'s";
 
-        return `${this.name} debugs ${
-            student.name
-        }${possessive} code on ${subject}.`;
+        return `${this.name} debugs ${student.name}${possessive} code on ${subject}.`;
     }
 }
 
 var bob = new Instructor({
-    name: 'Bob',
-    location: 'Cairo',
+    name: "Bob",
+    location: "Cairo",
     age: 46,
-    favLanguage: 'COBOL',
-    specialty: 'Front-end',
+    favLanguage: "COBOL",
+    specialty: "Front-end",
     catchPhrase: `And that's the way it goes.`
 });
 
 var chris = new Student({
-    name: 'Chris',
-    location: 'Timbuktu',
+    name: "Chris",
+    location: "Timbuktu",
     age: 6,
-    previousBackground: 'Invented computers',
-    className: 'WEB21',
-    favSubjects: ['Math', 'Culinary Art', 'Veterinary Medicine']
+    previousBackground: "Invented computers",
+    className: "WEB21",
+    favSubjects: ["Math", "Culinary Art", "Veterinary Medicine"],
+    grade: 65
 });
 
 var jamie = new Student({
-    name: 'Jamie',
-    location: 'Kansas',
+    name: "Jamie",
+    location: "Kansas",
     age: 101,
-    previousBackground: 'Lion tamer',
-    className: 'DS5',
-    favSubjects: ['Literature', 'PhysEd', 'Psychology']
+    previousBackground: "Lion tamer",
+    className: "DS5",
+    favSubjects: ["Literature", "PhysEd", "Psychology"],
+    grade: 80
 });
 
 var kat = new ProjectManager({
-    name: 'Kat',
-    location: 'Siberia',
+    name: "Kat",
+    location: "Siberia",
     age: 11,
-    favLanguage: 'Assembly',
-    specialty: 'games',
+    favLanguage: "Assembly",
+    specialty: "games",
     catchPhrase: `Wubbalubbadubdub.`,
-    gradClassName: 'WEB21',
-    favInstructor: 'Bob'
+    gradClassName: "WEB21",
+    favInstructor: "Bob"
 });
 
 console.log(bob.speak());
-console.log(bob.demo('Angular'));
-console.log(bob.grade(chris, 'React lifecycle methods'));
+console.log(bob.demo("Angular"));
+console.log(bob.grade(chris, "React lifecycle methods"));
+console.log(bob.changeGrade(chris));
 
 console.log(chris.speak());
 console.log(chris.listsSubjects());
-console.log(chris.PRAssignment('OOP exercise 1'));
+console.log(chris.PRAssignment("OOP exercise 1"));
 
 console.log(kat.speak());
-console.log(kat.demo('Webpack'));
-console.log(kat.grade(jamie, 'CSS'));
-console.log(kat.standUp('#web21'));
-console.log(kat.debugsCode(jamie, 'merge sort'));
-console.log(kat.debugsCode(chris, 'Node'));
+console.log(kat.demo("Webpack"));
+console.log(kat.grade(jamie, "CSS"));
+console.log(kat.standUp("#web21"));
+console.log(kat.debugsCode(jamie, "merge sort"));
+console.log(kat.debugsCode(chris, "Node"));
+console.log(bob.changeGrade(jamie));
+
+console.log(chris.graduate());
+console.log(jamie.graduate());
