@@ -29,3 +29,13 @@ class Instructor extends Person {
         return `${student.name} receives a perfect score on ${subject}`;
     }
 }
+
+class Student extends Person {
+    constructor(props) {
+        super(props);
+
+        this.previousBackground = props.previousBackground;
+        this.className = props.className;
+        this.favSubjects = props.favSubjects;
+    }
+}
