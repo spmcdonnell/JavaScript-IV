@@ -2,7 +2,8 @@
 
 Prototype Refactor
 
-1. Copy and paste your code or the solution from yesterday
+1. Copy and paste your code or the solution from yesterday.
+2. Your goal is to refactor all of this code to use ES6 Classes. The console.log() statements should still return what is expected of them.
 
 /*
   Object oriented design is commonly used in video games.  For this part of the assignment you will be implementing several constructor functions with their correct inheritance hierarchy.
@@ -22,16 +23,6 @@ Prototype Refactor
   * destroy() // prototype method that returns: `${this.name} was removed from the game.`
 */
 
-//   function GameObject(obj) {
-//     this.createdAt = obj.createdAt;
-//     this.name = obj.name;
-//     this.dimensions = obj.dimensions;
-//   }
-
-//   GameObject.prototype.destroy = function() {
-//     return `${this.name} was removed from the game.`;
-//   }
-
 class GameObject {
     constructor(attr) {
         this.createdAt = attr.createdAt;
@@ -50,16 +41,6 @@ class GameObject {
     * takeDamage() // prototype method -> returns the string '<object name> took damage.'
     * should inherit destroy() from GameObject's prototype
   */
-
-//   function CharacterStats(obj) {
-//     GameObject.call(this, obj);
-//     this.healthPoints = obj.healthPoints;
-//   }
-
-//   CharacterStats.prototype = Object.create(GameObject.prototype);
-//   CharacterStats.prototype.takeDamage = function() {
-//     return `${this.name} took damage.`;
-//   };
 
 class CharacterStats extends GameObject {
     constructor(attr) {
@@ -82,18 +63,6 @@ class CharacterStats extends GameObject {
     * should inherit destroy() from GameObject through CharacterStats
     * should inherit takeDamage() from CharacterStats
   */
-
-//   function Humanoid(obj) {
-//     CharacterStats.call(this, obj);
-//     this.team = obj.team;
-//     this.weapons = obj.weapons;
-//     this.language = obj.language;
-//   }
-
-//   Humanoid.prototype = Object.create(CharacterStats.prototype);
-//   Humanoid.prototype.greet = function() {
-//     return `${this.name} offers a greeting in ${this.language}.`;
-//   };
 
 class Humanoid extends CharacterStats {
     constructor(attr) {
@@ -118,17 +87,6 @@ class Humanoid extends CharacterStats {
     * should inherit greet() from Humanoid
   */
 
-//   function Villain(obj) {
-//     Humanoid.call(this, obj);
-//     this.powerLevel = obj.powerLevel;
-//   }
-
-//   Villain.prototype = Object.create(Humanoid.prototype);
-//   Villain.prototype.powerUp = function() {
-//     this.powerLevel += 5;
-//     return `${this.name} increased their power level by 5 points.`;
-//   };
-
 class Villain extends Humanoid {
     constructor(attr) {
         super(attr);
@@ -150,21 +108,6 @@ class Villain extends Humanoid {
     * should inherit greet() from Humanoid
   */
 
-//   function Hero(obj) {
-//     Humanoid.call(this, obj);
-//     this.powerLevel = obj.powerLevel;
-//   }
-
-//   Hero.prototype = Object.create(Humanoid.prototype);
-//   Hero.prototype.attack = function(victim) {
-//     victim.healthPoints -= 5;
-//     if (victim.healthPoints <= 0) {
-//       return `Our hero attacked ${victim.name} and killed them!`;
-//     } else {
-//       return `Our hero attacked ${victim.name} and reduced their healthPoints by 5 points, bringing their remaining HP to ${victim.healthPoints}.`;
-//     }
-//   };
-
 class Hero extends Humanoid {
     constructor(attr) {
         super(attr);
@@ -177,11 +120,7 @@ class Hero extends Humanoid {
         if (victim.healthPoints <= 0) {
             return `Our hero attacked ${victim.name} and killed them!`;
         } else {
-            return `Our hero attacked ${
-                victim.name
-            } and reduced their healthPoints by 5 points, bringing their remaining HP to ${
-                victim.healthPoints
-            }.`;
+            return `Our hero attacked ${victim.name} and reduced their healthPoints by 5 points, bringing their remaining HP to ${victim.healthPoints}.`;
         }
     }
 }
@@ -202,10 +141,10 @@ const mage = new Humanoid({
         height: 1
     },
     healthPoints: 5,
-    name: 'Bruce',
-    team: 'Mage Guild',
-    weapons: ['Staff of Shamalama'],
-    language: 'Common Tongue'
+    name: "Bruce",
+    team: "Mage Guild",
+    weapons: ["Staff of Shamalama"],
+    language: "Common Tongue"
 });
 
 const swordsman = new Humanoid({
@@ -216,10 +155,10 @@ const swordsman = new Humanoid({
         height: 2
     },
     healthPoints: 15,
-    name: 'Sir Mustachio',
-    team: 'The Round Table',
-    weapons: ['Giant Sword', 'Shield'],
-    language: 'Common Tongue'
+    name: "Sir Mustachio",
+    team: "The Round Table",
+    weapons: ["Giant Sword", "Shield"],
+    language: "Common Tongue"
 });
 
 const archer = new Humanoid({
@@ -230,10 +169,10 @@ const archer = new Humanoid({
         height: 4
     },
     healthPoints: 10,
-    name: 'Lilith',
-    team: 'Forest Kingdom',
-    weapons: ['Bow', 'Dagger'],
-    language: 'Elvish'
+    name: "Lilith",
+    team: "Forest Kingdom",
+    weapons: ["Bow", "Dagger"],
+    language: "Elvish"
 });
 
 const villain = new Villain({
@@ -244,10 +183,10 @@ const villain = new Villain({
         height: 6
     },
     healthPoints: 10,
-    name: 'Belic',
-    team: 'Alistain',
-    weapons: ['Bow', 'Dagger'],
-    language: 'Grunts and whistles',
+    name: "Belic",
+    team: "Alistain",
+    weapons: ["Bow", "Dagger"],
+    language: "Grunts and whistles",
     powerLevel: 10
 });
 
@@ -259,10 +198,10 @@ const hero = new Hero({
         height: 2
     },
     healthPoints: 10,
-    name: 'Bob',
-    team: 'Jones',
-    weapons: ['Buster Sword', 'Bolt Materia'],
-    language: 'mute'
+    name: "Bob",
+    team: "Jones",
+    weapons: ["Buster Sword", "Bolt Materia"],
+    language: "mute"
 });
 
 console.log(mage.createdAt); // Today's date
@@ -281,11 +220,8 @@ console.log(villain.powerLevel); // Belic shows off his raised power level.
 console.log(hero.attack(villain)); // Belic shows off his raised power level.
 console.log(hero.attack(villain)); // Belic shows off his raised power level.
 
-// Stretch task:
-// * Create Villain and Hero constructor functions that inherit from the Humanoid constructor function.
-// * Give the Hero and Villains different methods that could be used to remove health points from objects which could result in destruction if health gets to 0 or drops below 0;
-// * Create two new objects, one a villain and one a hero and fight it out with methods!
-
-// 2. Your goal is to refactor all of this code to use ES6 Classes. The console.log() statements should still return what is expected of them.
-
 // */
+
+console.log("/* ------------------------------------------------------------------------- */");
+console.log("/* ----------------------- END REFACTOR EXERCISE --------------------------- */");
+console.log("/* ------------------------------------------------------------------------- */");

@@ -77,16 +77,20 @@ class Student extends Person {
     }
 
     graduate() {
+        var mainContainer = document.querySelector('div[data-name="' + CSS.escape(this.name.toLowerCase()) + '"]');
+        var title = document.querySelector('div[data-name="' + CSS.escape(this.name.toLowerCase()) + '"] h2');
+        var image = document.querySelector('div[data-name="' + CSS.escape(this.name.toLowerCase()) + '"] img');
+
         if (this.grade >= 70) {
-            document.querySelector('div[data-name="' + CSS.escape(this.name.toLowerCase()) + '"]').style.backgroundColor = "#adffe3";
-            document.querySelector('div[data-name="' + CSS.escape(this.name.toLowerCase()) + '"] h2').innerHTML = `${this.name} graduated!`;
-            document.querySelector('div[data-name="' + CSS.escape(this.name.toLowerCase()) + '"] img').src = "https://media.giphy.com/media/RdHSzuTg7lSlPuGVci/giphy.gif";
+            mainContainer.style.backgroundColor = "#adffe3";
+            title.innerHTML = `${this.name} graduated!`;
+            image.src = "https://media.giphy.com/media/RdHSzuTg7lSlPuGVci/giphy.gif";
 
             return `${this.name} graduated!`;
         } else {
-            document.querySelector('div[data-name="' + CSS.escape(this.name.toLowerCase()) + '"]').style.backgroundColor = "#ffa6a6";
-            document.querySelector('div[data-name="' + CSS.escape(this.name.toLowerCase()) + '"] h2').innerHTML = `${this.name} has a little while to go before graduating.`;
-            document.querySelector('div[data-name="' + CSS.escape(this.name.toLowerCase()) + '"] img').src = "https://media.giphy.com/media/lmNPugL9ORbMs/giphy.gif";
+            mainContainer.style.backgroundColor = "#ffa6a6";
+            title.innerHTML = `${this.name} has a little while to go before graduating...`;
+            image.src = "https://media.giphy.com/media/lmNPugL9ORbMs/giphy.gif";
 
             return `${this.name} has a little while to go before graduating.`;
         }
